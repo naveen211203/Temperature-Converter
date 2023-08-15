@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .bk {
+            background-image: url(bk.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .f {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 10px 35px 10px lavenderblush;
+            padding: 50px;
+            margin-left: 350px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .f h1 {
+            margin-top: 0;
+            margin-bottom: 40px;
+        }
+
+        .f label,.f select,.f input,.f button {
+            display: block;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .f label {
+            display: inline-block;
+            width: 48%;
+            text-align: left;
+            padding-top: 20px;
+            font-weight: bold;
+        }
+
+        .f input,.f select {
+            display: inline-block;
+            width: 48%;
+            height: 40px;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        .f button {
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bk">
+        <form action="#" class="f" id="temperature-form">
+            <h1>Temperature Converter</h1>
+            <label for="temperature">Enter Temperature Value</label>
+            <input type="number" id="temperature" name="temperature" placeholder="Enter The Value">
+
+            <label for="conversion">Temperature Conversions</label>
+            <select id="conversion" name="conversion">
+                <option value="Select">Select</option>
+                <option value="CelsiusToFahrenheit">Celsius to Fahrenheit</option>
+                <option value="CelsiusToKelvin">Celsius to Kelvin</option>
+                <option value="FahrenheitToCelsius">Fahrenheit to Celsius</option>
+                <option value="FahrenheitToKelvin">Fahrenheit to Kelvin</option>
+                <option value="KelvinToCelsius">Kelvin to Celsius</option>
+                <option value="KelvinToFahrenheit">Kelvin to Fahrenheit</option>
+            </select>
+
+            <button type="button" onclick="convertTemperature()">Convert</button>
+            <p id="result"></p>
+        </form>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            const temperature = parseFloat(document.getElementById("temperature").value);
+            const conversionType = document.getElementById("conversion").value;
+            let result = "";
+
+            if (isNaN(temperature)) {
+                alert("Please enter a valid temperature.");
+                return;
+            }
+
+            if (conversionType === "Select") {
+                alert("Please select a valid conversion type.");
+                return;
+            }
+
+            switch (conversionType) {
+                case "CelsiusToFahrenheit":
+                    result = (temperature * 9/5) + 32 + " °F";
+                    break;
+                case "CelsiusToKelvin":
+                    result = (temperature + 273.15) + " K";
+                    break;
+                case "FahrenheitToCelsius":
+                    result = (temperature - 32) * 5/9 + " °C";
+                    break;
+                case "FahrenheitToKelvin":
+                    result = ((temperature - 32) * 5/9) + 273.15 + " K";
+                    break;
+                case "KelvinToCelsius":
+                    result = (temperature - 273.15) + " °C";
+                    break;
+                case "KelvinToFahrenheit":
+                    result = ((temperature - 273.15) * 9/5) + 32 + " °F";
+                    break;
+                default:
+                    result = "Please select a valid conversion type.";
+            }
+
+            document.getElementById("result").textContent = result;
+        }
+    </script>
+</body>
+
+</html>
